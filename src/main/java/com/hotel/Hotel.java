@@ -115,24 +115,7 @@ public class Hotel {
 
 
     }
-//    public int calculateprice(ArrayList<Hotel> list,ArrayList<String> date)
-//    {
-//        Iterator it=list.iterator();
-//        while(it.hasNext())
-//        {
-//            if(it.next()=="Lakewood")
-//            {
-//                Iterator itt= date.iterator();
-//                while (itt.hasNext())
-//                {
-//                    String day=itt.next();
-//                    costofLake+=
-//                }
-//
-//            }
-//        }
-//
-//    }
+
 
     public static void main(String[] args) throws ParseException {
       Hotel h1= new Hotel(3,"Lakewood",110,90);
