@@ -58,13 +58,13 @@ public class Hotel {
             return cost2;
         }
         else if(cost2==cost3) {
-            //System.out.println("Cheapest is Ridgewood: ");
+
             return cost3;
 
 
         }
         else
-           // System.out.println("Cheapest is Bridgewood: ");
+
             return cost3;
 
     }
