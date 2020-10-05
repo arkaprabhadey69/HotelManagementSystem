@@ -133,7 +133,7 @@ public class Hotel {
         rewardee=s.nextInt();
         String result=h1.calculateprice(dates,rewardee);
 
-       // int data= dates.stream().filter(a->a.)
+
 
 //        int result=min(costofLake,costofBridge,getCostofRidge);
         System.out.println("Cheapest hotel: "+result);
