@@ -122,11 +122,11 @@ public class Hotel {
         Hotel h2= new Hotel(4,"Bridgewood",150,50);
         Hotel h3= new Hotel(5,"Ridgewood",220,150);
         ArrayList<String> dates=new ArrayList<>();
-       // dates.add("3/10/2020");
+
         dates.add("3/10/2020");
         dates.add("4/10/2020");
 
-        //Iterator<String > it= dates.iterator();
+
         int rewardee;
         System.out.println("Enter whether rewardee or not: ");
         Scanner s= new Scanner(System.in);
@@ -135,7 +135,6 @@ public class Hotel {
 
 
 
-//        int result=min(costofLake,costofBridge,getCostofRidge);
         System.out.println("Cheapest hotel: "+result);
 
 
