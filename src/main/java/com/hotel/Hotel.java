@@ -40,21 +40,21 @@ public class Hotel {
     public static int min(int cost1,int cost2,int cost3)
     {
         if(cost1<cost2&&cost1<cost3) {
-           // System.out.println("Cheapest id Lakewood: ");
+
 
             return cost1;
         }
         else if(cost2<cost1&&cost2<cost3) {
-            //System.out.println("Cheapest id Bridgewood: ");
+
             return cost2;
         }
         else if(cost3<cost1&&cost3<cost2)
         {
-            //System.out.println("Cheapest is Ridgewood: ");
+
             return cost3;
         }
         else if(cost1==cost2) {
-            //System.out.println("Minimum cost is: "+cost1+" and cheapest hotel is: ");
+
             return cost2;
         }
         else if(cost2==cost3) {
