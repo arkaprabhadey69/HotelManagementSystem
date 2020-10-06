@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class Hotel {
 
@@ -90,6 +92,8 @@ public class Hotel {
         }
 
     }
+//
+//
 //Method For Finding cheapest hotel and with best rating in case of a tie
     public static String findCheapestHotel() throws ParseException{
 
@@ -98,6 +102,7 @@ public class Hotel {
         Integer minCost= HotelNameAndCostMap.entrySet().stream().min(Map.Entry.comparingByValue()).get().getValue();
 
         ArrayList<String>cheapHotels = new ArrayList<>();
+
         for (Map.Entry<String, Integer> entry : HotelNameAndCostMap.entrySet()) {
             if (minCost >= entry.getValue()) {
 
@@ -106,16 +111,15 @@ public class Hotel {
             }
         }
         System.out.println(cheapHotels);
-        int maxRating = -1;
-        String cheapestMostRatedHotelName = "";
-        for (int i = 0; i < cheapHotels.size(); i++){
 
-            if(HotelNameAndRatingMap.get(cheapHotels.get(i))>maxRating) {
-                maxRating = HotelNameAndRatingMap.get(cheapHotels.get(i));
-                cheapestMostRatedHotelName = cheapHotels.get(i);
-
-            }
-        }
+        String cheapestMostRatedHotelName=HotelNameAndRatingMap.entrySet().stream()
+                                            .filter(p->cheapHotels.contains(p.getKey()))
+                                            .max(Map.Entry.comparingByValue())
+                                            .get().getKey();
+        int maxRating=HotelNameAndRatingMap.entrySet().stream()
+                .filter(p->cheapHotels.contains(p.getKey()))
+                .max(Map.Entry.comparingByValue())
+                .get().getValue();
         System.out.println("Cheapest and best rated hotel is: "+cheapestMostRatedHotelName+" with rating : "+maxRating);
 
         return cheapestMostRatedHotelName;
@@ -129,7 +133,7 @@ public class Hotel {
         Hotel h2 = new Hotel(4, "Bridgewood", 150, 50,110,50);
         Hotel h3 = new Hotel(5, "Ridgewood", 220, 150,100,40);
         ArrayList<String> dates = new ArrayList<>();
-        dates.add("6/10/2020");
+        //dates.add("6/10/2020");
 
         dates.add("5/10/2020");
         dates.add("4/10/2020");
