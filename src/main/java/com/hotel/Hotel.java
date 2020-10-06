@@ -113,7 +113,7 @@ public class Hotel {
             if(HotelNameAndRatingMap.get(cheapHotels.get(i))>maxRating) {
                 maxRating = HotelNameAndRatingMap.get(cheapHotels.get(i));
                 cheapestMostRatedHotelName = cheapHotels.get(i);
-                // System.out.println(maxRating+" "+cheapestMostRatedHotelName);
+
             }
         }
         System.out.println("Cheapest and best rated hotel is: "+cheapestMostRatedHotelName+" with rating : "+maxRating);
