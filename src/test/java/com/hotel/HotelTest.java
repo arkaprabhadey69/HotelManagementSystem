@@ -1,76 +1,132 @@
 package com.hotel;
 
-//import static com.hotel.Hotel.calculateprice;
-import static org.junit.Assert.*;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 
 
 public class HotelTest {
-    Hotel h= new Hotel(1,"BridgeWood",100,200);
+    public static HashMap<String,Integer> HotelNameAndRatingMap= new HashMap<>();
+    public static HashMap<String ,Integer> HotelNameAndCostMap= new HashMap<>();
+    Hotel h1 = new Hotel(3, "Lakewood", 110, 90, 80, 80);
+    Hotel h2 = new Hotel(4, "Bridgewood", 150, 50,110,50);
+    Hotel h3 = new Hotel(5, "Ridgewood", 220, 150,100,40);
+
+
     @Test
-    public void given_both_weekend_dates_should_return_true() throws ParseException {
-        Hotel h1= new Hotel(1,"BridgeWood",100,200);
+    public void given_all_hotel_rates_should_return_true() throws ParseException {
+
         ArrayList<String> dates=new ArrayList<>();
-        dates.add("4/10/2020");
         dates.add("3/10/2020");
-        String result=h.calculateprice(dates,0);
-        Assert.assertEquals("Bridgewood",result);
+        dates.add("4/10/2020");
+       h1.calculatePrice(dates,1);
+       h2.calculatePrice(dates,1);
+       h3.calculatePrice(dates,1);
+        String name=h1.findCheapestHotel();
+        Assert.assertEquals("Ridgewood",name);
+
+
 
     }
 
+       @Test
+      public void given_both_weekend_dates_should_return_true() throws ParseException {
+
+           ArrayList<String> dates = new ArrayList<>();
+
+           dates.add("3/10/2020");
+           dates.add("4/10/2020");
+           int result = h1.calculatePrice(dates, 1);
+
+           Assert.assertEquals(160, result);
+       }
+
+@Test
+    public void given_one_weekend_one_weekday_dates_should_return_true() throws ParseException {
+
+        ArrayList<String> dates = new ArrayList<>();
+
+        dates.add("5/10/2020");
+        dates.add("4/10/2020");
+        int result = h2.calculatePrice(dates, 0);
+
+        Assert.assertEquals(200, result);
+    }
+@Test
+    public void given_one_weekend_one_weekday_dates_should_return_true_rewardee() throws ParseException {
+
+        ArrayList<String> dates = new ArrayList<>();
+
+        dates.add("5/10/2020");
+        dates.add("4/10/2020");
+        int result = h2.calculatePrice(dates, 1);
+
+        Assert.assertEquals(160, result);
+    }
     @Test
-    public void given_both_weekday_dates_should_return_true() throws ParseException {
+    public void given_all_hotel_rates_should_return_true_for_weekdays_rewardee() throws ParseException {
+
         ArrayList<String> dates=new ArrayList<>();
         dates.add("5/10/2020");
         dates.add("6/10/2020");
-        String result=h.calculateprice(dates,0);
-        Assert.assertEquals("Lakewood",result);
+        h1.calculatePrice(dates,1);
+        h2.calculatePrice(dates,1);
+        h3.calculatePrice(dates,1);
+        String name=h1.findCheapestHotel();
+        Assert.assertEquals("Lakewood",name);
+
+
 
     }
     @Test
-    public void given_one_weekday_one_weekend_dates_should_return_true() throws ParseException {
+    public void given_all_hotel_rates_should_return_true_for_weekdays_non_rewardee() throws ParseException {
+
+        ArrayList<String> dates=new ArrayList<>();
+        dates.add("5/10/2020");
+        dates.add("6/10/2020");
+        h1.calculatePrice(dates,0);
+        h2.calculatePrice(dates,0);
+        h3.calculatePrice(dates,0);
+        String name=h1.findCheapestHotel();
+        Assert.assertEquals("Lakewood",name);
+
+
+
+    }
+    @Test
+    public void given_all_hotel_rates_should_return_highest_rating_for_tie() throws ParseException {
+
         ArrayList<String> dates=new ArrayList<>();
         dates.add("4/10/2020");
         dates.add("5/10/2020");
-        String result=h.calculateprice(dates,0);
-        Assert.assertEquals("Lakewood",result);
+        h1.calculatePrice(dates,0);
+        h2.calculatePrice(dates,0);
+        h3.calculatePrice(dates,0);
+        String name=h1.findCheapestHotel();
+        Assert.assertEquals("Bridgewood",name);
+
+
 
     }
     @Test
-    public void given_rewardee_dates_should_return_true() throws ParseException {
+    public void given_two_or_more_dates_should_return_correct_name() throws ParseException {
 
         ArrayList<String> dates=new ArrayList<>();
-        dates.add("8/10/2020");
-        dates.add("9/10/2020");
-        //dates.add("9/10/2020");
-        String result=h.calculateprice(dates,1);
-        Assert.assertEquals("Lakewood",result);
+        dates.add("4/10/2020");
+        dates.add("5/10/2020");
+        dates.add("6/10/2020");
+        h1.calculatePrice(dates,0);
+        h2.calculatePrice(dates,0);
+        h3.calculatePrice(dates,0);
+        String name=h1.findCheapestHotel();
+        Assert.assertEquals("Lakewood",name);
 
-    }
-    @Test
-    public void given_rewardee_dates_weekend_should_return_true() throws ParseException {
 
-        ArrayList<String> dates=new ArrayList<>();
-        dates.add("10/10/2020");
-        dates.add("11/10/2020");
-        //dates.add("9/10/2020");
-        String result=h.calculateprice(dates,1);
-        Assert.assertEquals("Ridgewood",result);
-
-    }
-    @Test
-    public void given_rewardee_dates_one_weekend_one_weekday_should_return_true() throws ParseException {
-
-        ArrayList<String> dates=new ArrayList<>();
-        dates.add("10/10/2020");
-        dates.add("9/10/2020");
-        //dates.add("9/10/2020");
-        String result=h.calculateprice(dates,1);
-        Assert.assertEquals("Ridgewood",result);
 
     }
 

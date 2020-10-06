@@ -1,142 +1,155 @@
 package com.hotel;
 
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Hotel {
-    public  String hotelname;
-    public  int weekdayrate;
-    public  int weekendrate;
-    static  int costofLake;
-    static  int costofBridge;
-    static int  getCostofRidge;
-    int rating;
 
-    public static void Display()
-    {
+    public static HashMap<String, Integer> HotelNameAndCostMap;
+    public static ArrayList<String> HotelName;
+
+    public String hotelName;
+    public int weekDayRate;
+    public int weekEndRate;
+    static int costOfLake;
+    static int costOfBridge;
+    static int getCostOfRidge;
+    static int totalCost;
+    int rating;
+    static  int i=0;
+    public int rewardweekday;
+    public int rewardweekend;
+    public static HashMap<String,Integer> HotelNameAndRatingMap;
+
+    public static void Display() {
         System.out.println("Welcome to Hostel Reservation System");
     }
-  public static String getDayofWeek(String date) throws ParseException {
 
-      SimpleDateFormat format1=new SimpleDateFormat("dd/MM/yyyy");
-      Date dt1=format1.parse(date);
-      DateFormat format2=new SimpleDateFormat("EE");
-      String finalDay=format2.format(dt1);
-      return  finalDay;
-  }
-    public Hotel(int rating,String hotelname,int weekdayrate, int weekendrate) {
-        this.rating=rating;
-        this.hotelname = hotelname;
-        this.weekdayrate=weekdayrate;
-        this.weekendrate=weekendrate;
+    public static String getDayOfWeek(String date) throws ParseException {
+
+        SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
+        Date dt1 = format1.parse(date);
+        DateFormat format2 = new SimpleDateFormat("EE");
+        String finalDay = format2.format(dt1);
+        return finalDay;
     }
-    public static int min(int cost1,int cost2,int cost3)
+
+    public Hotel(int rating, String hotelName, int weekDayRate, int weekEndRate,int rewardweekday,int rewardweekend) {
+        this.rating = rating;
+        this.hotelName = hotelName;
+        this.weekDayRate = weekDayRate;
+        this.weekEndRate = weekEndRate;
+        this.rewardweekday=rewardweekday;
+        this.rewardweekend=rewardweekend;
+        HotelNameAndCostMap = new HashMap<String, Integer>();
+        HotelNameAndRatingMap= new HashMap<>();
+        HotelName = new ArrayList<String>();
+
+    }
+
+
+//Method to calculate price of each hotel
+    public int calculatePrice(ArrayList<String> list, int rewardCustomerOrRegular) throws ParseException {
+        Iterator<String> it = list.iterator();
+        totalCost = 0;
+
+        if (rewardCustomerOrRegular == 0) {
+            while (it.hasNext()) {
+                String day = getDayOfWeek(it.next());
+                if (day.equals("Sun") || day.equals("Sat"))
+                    totalCost += weekEndRate;
+                else
+                    totalCost += weekDayRate;
+            }
+        } else {
+            while (it.hasNext()) {
+
+                String day = getDayOfWeek(it.next());
+                if (day.equals("Sun") || day.equals("Sat"))
+                    totalCost += rewardweekend;
+                else
+                    totalCost += rewardweekday;
+            }
+        }
+        HotelNameAndCostMap.put(hotelName, totalCost);
+        HotelNameAndRatingMap.put(hotelName,rating);
+        return totalCost;
+    }
+    //Method to Display hotelnames along with their cost
+    public static void DisplayDetails()
     {
-        if(cost1<cost2&&cost1<cost3) {
-
-
-            return cost1;
+        for (Map.Entry<String, Integer> entry : HotelNameAndCostMap.entrySet()) {
+            System.out.println(i);
+            i++;
+            System.out.println(entry.getKey() + " " + entry.getValue());
         }
-        else if(cost2<cost1&&cost2<cost3) {
-
-            return cost2;
-        }
-        else if(cost3<cost1&&cost3<cost2)
-        {
-
-            return cost3;
-        }
-        else if(cost1==cost2) {
-
-            return cost2;
-        }
-        else if(cost2==cost3) {
-
-            return cost3;
-
-
-        }
-        else
-
-            return cost3;
 
     }
-    public String calculateprice(ArrayList<String> list, int flag) throws ParseException {
-        Iterator<String > it= list.iterator();
-        if(flag==0) {
-            while (it.hasNext()) {
-                String day = getDayofWeek(it.next());
-                if (day.equals("Sun") || day.equals("Sat")) {
-                    costofLake += 90;
-                    costofBridge += 50;
-                    getCostofRidge += 150;
-                } else {
-                    costofLake += 110;
-                    costofBridge += 150;
-                    getCostofRidge += 220;
-                }
-            }
-        }
-        else
-        {
-            while (it.hasNext()) {
-                String day = getDayofWeek(it.next());
-                if (day.equals("Sun") || day.equals("Sat")) {
-                    costofLake += 80;
-                    costofBridge += 50;
-                    getCostofRidge += 40;
-                } else {
-                    costofLake += 80;
-                    costofBridge += 110;
-                    getCostofRidge += 100;
-                }
-            }
-        }
-        int result=min(costofLake,costofBridge,getCostofRidge);
-        if(result==costofLake) {
-            System.out.println("Cost is: " + result);
-            return "Lakewood";
-        }
-        else if(result==costofBridge) {
-            System.out.println("Cost is: " + result);
-            return "Bridgewood";
-        }
-        else {
-            System.out.println("Cost is: " + result);
-            return "Ridgewood";
-        }
+//Method For Finding cheapest hotel and with best rating in case of a tie
+    public static String findCheapestHotel() throws ParseException{
 
+
+
+        Integer minCost= HotelNameAndCostMap.entrySet().stream().min(Map.Entry.comparingByValue()).get().getValue();
+
+        ArrayList<String>cheapHotels = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : HotelNameAndCostMap.entrySet()) {
+            if (minCost >= entry.getValue()) {
+
+                minCost = entry.getValue();
+                cheapHotels.add(entry.getKey());
+            }
+        }
+        System.out.println(cheapHotels);
+        int maxRating = -1;
+        String cheapestMostRatedHotelName = "";
+        for (int i = 0; i < cheapHotels.size(); i++){
+
+            if(HotelNameAndRatingMap.get(cheapHotels.get(i))>maxRating) {
+                maxRating = HotelNameAndRatingMap.get(cheapHotels.get(i));
+                cheapestMostRatedHotelName = cheapHotels.get(i);
+                // System.out.println(maxRating+" "+cheapestMostRatedHotelName);
+            }
+        }
+        System.out.println("Cheapest and best rated hotel is: "+cheapestMostRatedHotelName+" with rating : "+maxRating);
+
+        return cheapestMostRatedHotelName;
 
     }
 
 
     public static void main(String[] args) throws ParseException {
-      Hotel h1= new Hotel(3,"Lakewood",110,90);
-        Hotel h2= new Hotel(4,"Bridgewood",150,50);
-        Hotel h3= new Hotel(5,"Ridgewood",220,150);
-        ArrayList<String> dates=new ArrayList<>();
 
-        dates.add("3/10/2020");
+        Hotel h1 = new Hotel(3, "Lakewood", 110, 90,80,80);
+        Hotel h2 = new Hotel(4, "Bridgewood", 150, 50,110,50);
+        Hotel h3 = new Hotel(5, "Ridgewood", 220, 150,100,40);
+        ArrayList<String> dates = new ArrayList<>();
+        dates.add("6/10/2020");
+
+        dates.add("5/10/2020");
         dates.add("4/10/2020");
+        int rewardCustomerOrRegular;
+
+        System.out.println("Enter whether a Loyalty Customer or Not\n 0 for NO 1 for YES: ");
+        Scanner s = new Scanner(System.in);
+        rewardCustomerOrRegular = s.nextInt();
+
+        h1.calculatePrice(dates, rewardCustomerOrRegular);
+        h2.calculatePrice(dates, rewardCustomerOrRegular);
+        h3.calculatePrice(dates, rewardCustomerOrRegular);
+        DisplayDetails();
 
 
-        int rewardee;
-        System.out.println("Enter whether rewardee or not: ");
-        Scanner s= new Scanner(System.in);
-        rewardee=s.nextInt();
-        String result=h1.calculateprice(dates,rewardee);
+
+
+       findCheapestHotel();
 
 
 
-        System.out.println("Cheapest hotel: "+result);
-
-
+        }
     }
-}

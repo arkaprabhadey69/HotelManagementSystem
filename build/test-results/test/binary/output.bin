@@ -1,1 +1,10 @@
-Cost is: 80
+[Bridgewood, Lakewood]
+>Cheapest and best rated hotel is: Bridgewood with rating : 4
+[Lakewood]
+<Cheapest and best rated hotel is: Lakewood with rating : 3
+[Ridgewood]
+=Cheapest and best rated hotel is: Ridgewood with rating : 5
+[Lakewood]
+<Cheapest and best rated hotel is: Lakewood with rating : 3
+	[Lakewood]
+	<Cheapest and best rated hotel is: Lakewood with rating : 3
