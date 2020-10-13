@@ -13,9 +13,9 @@ import java.util.HashMap;
 public class HotelTest {
     public static HashMap<String,Integer> HotelNameAndRatingMap= new HashMap<>();
     public static HashMap<String ,Integer> HotelNameAndCostMap= new HashMap<>();
-    Hotel h1 = new Hotel(3, "Lakewood", 110, 90, 80, 80);
-    Hotel h2 = new Hotel(4, "Bridgewood", 150, 50,110,50);
-    Hotel h3 = new Hotel(5, "Ridgewood", 220, 150,100,40);
+    Hotel hotel1 = new Hotel(3, "Lakewood", 110, 90, 80, 80);
+    Hotel hotel2 = new Hotel(4, "Bridgewood", 150, 50,110,50);
+    Hotel hotel3 = new Hotel(5, "Ridgewood", 220, 150,100,40);
 
 
     @Test
@@ -24,10 +24,10 @@ public class HotelTest {
         ArrayList<String> dates=new ArrayList<>();
         dates.add("3/10/2020");
         dates.add("4/10/2020");
-       h1.calculatePrice(dates,1);
-       h2.calculatePrice(dates,1);
-       h3.calculatePrice(dates,1);
-        String name=h1.findCheapestHotel();
+       hotel1.calculatePrice(dates,1);
+       hotel2.calculatePrice(dates,1);
+       hotel3.calculatePrice(dates,1);
+        String name=hotel1.findCheapestHotel();
         Assert.assertEquals("Ridgewood",name);
 
 
@@ -41,7 +41,7 @@ public class HotelTest {
 
            dates.add("3/10/2020");
            dates.add("4/10/2020");
-           int result = h1.calculatePrice(dates, 1);
+           int result = hotel1.calculatePrice(dates, 1);
 
            Assert.assertEquals(160, result);
        }
@@ -53,7 +53,7 @@ public class HotelTest {
 
         dates.add("5/10/2020");
         dates.add("4/10/2020");
-        int result = h2.calculatePrice(dates, 0);
+        int result = hotel2.calculatePrice(dates, 0);
 
         Assert.assertEquals(200, result);
     }
@@ -64,7 +64,7 @@ public class HotelTest {
 
         dates.add("5/10/2020");
         dates.add("4/10/2020");
-        int result = h2.calculatePrice(dates, 1);
+        int result = hotel2.calculatePrice(dates, 1);
 
         Assert.assertEquals(160, result);
     }
@@ -74,10 +74,10 @@ public class HotelTest {
         ArrayList<String> dates=new ArrayList<>();
         dates.add("5/10/2020");
         dates.add("6/10/2020");
-        h1.calculatePrice(dates,1);
-        h2.calculatePrice(dates,1);
-        h3.calculatePrice(dates,1);
-        String name=h1.findCheapestHotel();
+        hotel1.calculatePrice(dates,1);
+        hotel2.calculatePrice(dates,1);
+        hotel3.calculatePrice(dates,1);
+        String name=hotel1.findCheapestHotel();
         Assert.assertEquals("Lakewood",name);
 
 
@@ -89,10 +89,10 @@ public class HotelTest {
         ArrayList<String> dates=new ArrayList<>();
         dates.add("5/10/2020");
         dates.add("6/10/2020");
-        h1.calculatePrice(dates,0);
-        h2.calculatePrice(dates,0);
-        h3.calculatePrice(dates,0);
-        String name=h1.findCheapestHotel();
+        hotel1.calculatePrice(dates,0);
+        hotel2.calculatePrice(dates,0);
+        hotel3.calculatePrice(dates,0);
+        String name=hotel1.findCheapestHotel();
         Assert.assertEquals("Lakewood",name);
 
 
@@ -104,10 +104,10 @@ public class HotelTest {
         ArrayList<String> dates=new ArrayList<>();
         dates.add("4/10/2020");
         dates.add("5/10/2020");
-        h1.calculatePrice(dates,0);
-        h2.calculatePrice(dates,0);
-        h3.calculatePrice(dates,0);
-        String name=h1.findCheapestHotel();
+        hotel1.calculatePrice(dates,0);
+        hotel2.calculatePrice(dates,0);
+        hotel3.calculatePrice(dates,0);
+        String name=hotel1.findCheapestHotel();
         Assert.assertEquals("Bridgewood",name);
 
 
@@ -120,10 +120,10 @@ public class HotelTest {
         dates.add("4/10/2020");
         dates.add("5/10/2020");
         dates.add("6/10/2020");
-        h1.calculatePrice(dates,0);
-        h2.calculatePrice(dates,0);
-        h3.calculatePrice(dates,0);
-        String name=h1.findCheapestHotel();
+        hotel1.calculatePrice(dates,0);
+        hotel2.calculatePrice(dates,0);
+        hotel3.calculatePrice(dates,0);
+        String name=hotel1.findCheapestHotel();
         Assert.assertEquals("Lakewood",name);
 
 

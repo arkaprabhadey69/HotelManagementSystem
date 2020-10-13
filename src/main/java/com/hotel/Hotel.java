@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Hotel {
 
@@ -23,10 +24,10 @@ public class Hotel {
     static int getCostOfRidge;
     static int totalCost;
     int rating;
-    static  int i=0;
+    static int i = 0;
     public int rewardweekday;
     public int rewardweekend;
-    public static HashMap<String,Integer> HotelNameAndRatingMap;
+    public static HashMap<String, Integer> HotelNameAndRatingMap;
 
     public static void Display() {
         System.out.println("Welcome to Hostel Reservation System");
@@ -41,21 +42,21 @@ public class Hotel {
         return finalDay;
     }
 
-    public Hotel(int rating, String hotelName, int weekDayRate, int weekEndRate,int rewardweekday,int rewardweekend) {
+    public Hotel(int rating, String hotelName, int weekDayRate, int weekEndRate, int rewardweekday, int rewardweekend) {
         this.rating = rating;
         this.hotelName = hotelName;
         this.weekDayRate = weekDayRate;
         this.weekEndRate = weekEndRate;
-        this.rewardweekday=rewardweekday;
-        this.rewardweekend=rewardweekend;
+        this.rewardweekday = rewardweekday;
+        this.rewardweekend = rewardweekend;
         HotelNameAndCostMap = new HashMap<String, Integer>();
-        HotelNameAndRatingMap= new HashMap<>();
+        HotelNameAndRatingMap = new HashMap<>();
         HotelName = new ArrayList<String>();
 
     }
 
 
-//Method to calculate price of each hotel
+    //Method to calculate price of each hotel
     public int calculatePrice(ArrayList<String> list, int rewardCustomerOrRegular) throws ParseException {
         Iterator<String> it = list.iterator();
         totalCost = 0;
@@ -79,12 +80,12 @@ public class Hotel {
             }
         }
         HotelNameAndCostMap.put(hotelName, totalCost);
-        HotelNameAndRatingMap.put(hotelName,rating);
+        HotelNameAndRatingMap.put(hotelName, rating);
         return totalCost;
     }
+
     //Method to Display hotelnames along with their cost
-    public static void DisplayDetails()
-    {
+    public static void DisplayDetails() {
         for (Map.Entry<String, Integer> entry : HotelNameAndCostMap.entrySet()) {
             System.out.println(i);
             i++;
@@ -92,16 +93,16 @@ public class Hotel {
         }
 
     }
-//
+
+    //
 //
 //Method For Finding cheapest hotel and with best rating in case of a tie
-    public static String findCheapestHotel() throws ParseException{
+    public static String findCheapestHotel() throws ParseException {
 
 
+        Integer minCost = HotelNameAndCostMap.entrySet().stream().min(Map.Entry.comparingByValue()).get().getValue();
 
-        Integer minCost= HotelNameAndCostMap.entrySet().stream().min(Map.Entry.comparingByValue()).get().getValue();
-
-        ArrayList<String>cheapHotels = new ArrayList<>();
+        ArrayList<String> cheapHotels = new ArrayList<>();
 
         for (Map.Entry<String, Integer> entry : HotelNameAndCostMap.entrySet()) {
             if (minCost >= entry.getValue()) {
@@ -111,16 +112,19 @@ public class Hotel {
             }
         }
         System.out.println(cheapHotels);
+//          List<Map.Entry<String, Integer>> cheapHotels1 = new ArrayList<>();
+//        cheapHotels1 = HotelNameAndCostMap.entrySet().stream().filter(s-> s.getValue()<=HotelNameAndCostMap.entrySet().stream().min(Map.Entry.comparingByValue()).get().getValue()).collect(Collectors.toList());
 
-        String cheapestMostRatedHotelName=HotelNameAndRatingMap.entrySet().stream()
-                                            .filter(p->cheapHotels.contains(p.getKey()))
-                                            .max(Map.Entry.comparingByValue())
-                                            .get().getKey();
-        int maxRating=HotelNameAndRatingMap.entrySet().stream()
-                .filter(p->cheapHotels.contains(p.getKey()))
+
+        String cheapestMostRatedHotelName = HotelNameAndRatingMap.entrySet().stream()
+                .filter(p -> cheapHotels.contains(p.getKey()))
+                .max(Map.Entry.comparingByValue())
+                .get().getKey();
+        int maxRating = HotelNameAndRatingMap.entrySet().stream()
+                .filter(p -> cheapHotels.contains(p.getKey()))
                 .max(Map.Entry.comparingByValue())
                 .get().getValue();
-        System.out.println("Cheapest and best rated hotel is: "+cheapestMostRatedHotelName+" with rating : "+maxRating);
+        System.out.println("Cheapest and best rated hotel is: " + cheapestMostRatedHotelName + " with rating : " + maxRating);
 
         return cheapestMostRatedHotelName;
 
@@ -129,31 +133,22 @@ public class Hotel {
 
     public static void main(String[] args) throws ParseException {
 
-        Hotel h1 = new Hotel(3, "Lakewood", 110, 90,80,80);
-        Hotel h2 = new Hotel(4, "Bridgewood", 150, 50,110,50);
-        Hotel h3 = new Hotel(5, "Ridgewood", 220, 150,100,40);
+        Hotel hotel1 = new Hotel(3, "Lakewood", 110, 90, 80, 80);
+        Hotel hotel2 = new Hotel(4, "Bridgewood", 150, 50, 110, 50);
+        Hotel hotel3 = new Hotel(5, "Ridgewood", 220, 150, 100, 40);
         ArrayList<String> dates = new ArrayList<>();
-        //dates.add("6/10/2020");
-
+        dates.add("6/10/2020");
         dates.add("5/10/2020");
         dates.add("4/10/2020");
         int rewardCustomerOrRegular;
-
-        System.out.println("Enter whether a Loyalty Customer or Not\n 0 for NO 1 for YES: ");
+        System.out.println("Enter whether a Loyal Or Regular\n 0 for NO 1 for YES: ");
         Scanner s = new Scanner(System.in);
         rewardCustomerOrRegular = s.nextInt();
-
-        h1.calculatePrice(dates, rewardCustomerOrRegular);
-        h2.calculatePrice(dates, rewardCustomerOrRegular);
-        h3.calculatePrice(dates, rewardCustomerOrRegular);
+        hotel1.calculatePrice(dates, rewardCustomerOrRegular);
+        hotel2.calculatePrice(dates, rewardCustomerOrRegular);
+        hotel3.calculatePrice(dates, rewardCustomerOrRegular);
         DisplayDetails();
+        findCheapestHotel();
 
-
-
-
-       findCheapestHotel();
-
-
-
-        }
     }
+}

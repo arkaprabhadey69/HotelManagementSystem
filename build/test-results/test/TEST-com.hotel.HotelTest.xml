@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.hotel.HotelTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2020-10-06T08:19:23" hostname="LAPTOP-JP0FR8LN" time="0.03">
+<testsuite name="com.hotel.HotelTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2020-10-13T03:41:26" hostname="LAPTOP-JP0FR8LN" time="0.051">
   <properties/>
-  <testcase name="given_all_hotel_rates_should_return_highest_rating_for_tie" classname="com.hotel.HotelTest" time="0.016"/>
-  <testcase name="given_two_or_more_dates_should_return_correct_name" classname="com.hotel.HotelTest" time="0.003"/>
+  <testcase name="given_all_hotel_rates_should_return_highest_rating_for_tie" classname="com.hotel.HotelTest" time="0.031"/>
+  <testcase name="given_two_or_more_dates_should_return_correct_name" classname="com.hotel.HotelTest" time="0.004"/>
   <testcase name="given_one_weekend_one_weekday_dates_should_return_true" classname="com.hotel.HotelTest" time="0.001"/>
   <testcase name="given_one_weekend_one_weekday_dates_should_return_true_rewardee" classname="com.hotel.HotelTest" time="0.001"/>
-  <testcase name="given_all_hotel_rates_should_return_true" classname="com.hotel.HotelTest" time="0.003"/>
-  <testcase name="given_all_hotel_rates_should_return_true_for_weekdays_rewardee" classname="com.hotel.HotelTest" time="0.002"/>
+  <testcase name="given_all_hotel_rates_should_return_true" classname="com.hotel.HotelTest" time="0.002"/>
+  <testcase name="given_all_hotel_rates_should_return_true_for_weekdays_rewardee" classname="com.hotel.HotelTest" time="0.003"/>
   <testcase name="given_both_weekend_dates_should_return_true" classname="com.hotel.HotelTest" time="0.001"/>
-  <testcase name="given_all_hotel_rates_should_return_true_for_weekdays_non_rewardee" classname="com.hotel.HotelTest" time="0.002"/>
+  <testcase name="given_all_hotel_rates_should_return_true_for_weekdays_non_rewardee" classname="com.hotel.HotelTest" time="0.003"/>
   <system-out><![CDATA[[Bridgewood, Lakewood]
 Cheapest and best rated hotel is: Bridgewood with rating : 4
 [Lakewood]
