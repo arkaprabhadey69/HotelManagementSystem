@@ -112,10 +112,6 @@ public class Hotel {
             }
         }
         System.out.println(cheapHotels);
-//          List<Map.Entry<String, Integer>> cheapHotels1 = new ArrayList<>();
-//        cheapHotels1 = HotelNameAndCostMap.entrySet().stream().filter(s-> s.getValue()<=HotelNameAndCostMap.entrySet().stream().min(Map.Entry.comparingByValue()).get().getValue()).collect(Collectors.toList());
-
-
         String cheapestMostRatedHotelName = HotelNameAndRatingMap.entrySet().stream()
                 .filter(p -> cheapHotels.contains(p.getKey()))
                 .max(Map.Entry.comparingByValue())
@@ -130,25 +126,4 @@ public class Hotel {
 
     }
 
-
-    public static void main(String[] args) throws ParseException {
-
-        Hotel hotel1 = new Hotel(3, "Lakewood", 110, 90, 80, 80);
-        Hotel hotel2 = new Hotel(4, "Bridgewood", 150, 50, 110, 50);
-        Hotel hotel3 = new Hotel(5, "Ridgewood", 220, 150, 100, 40);
-        ArrayList<String> dates = new ArrayList<>();
-        dates.add("6/10/2020");
-        dates.add("5/10/2020");
-        dates.add("4/10/2020");
-        int rewardCustomerOrRegular;
-        System.out.println("Enter whether a Loyal Or Regular\n 0 for NO 1 for YES: ");
-        Scanner s = new Scanner(System.in);
-        rewardCustomerOrRegular = s.nextInt();
-        hotel1.calculatePrice(dates, rewardCustomerOrRegular);
-        hotel2.calculatePrice(dates, rewardCustomerOrRegular);
-        hotel3.calculatePrice(dates, rewardCustomerOrRegular);
-        DisplayDetails();
-        findCheapestHotel();
-
-    }
 }
